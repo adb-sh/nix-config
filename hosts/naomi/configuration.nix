@@ -78,6 +78,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pkgs.yubikey-personalization
+    ungoogled-chromium
   ];
 
   virtualisation.docker.enable = true;
