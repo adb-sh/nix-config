@@ -3,6 +3,7 @@
     xwayland.enable = true;
     sway = {
       enable = true;
+      wrapperFeatures.gtk = true;
       extraPackages = with pkgs; [
         swaylock-fancy
         swayidle
@@ -17,16 +18,42 @@
         dmenu
         #dmenu-wayland
         xdg-desktop-portal-wlr
+        polkit
+        polkit_gnome
       ];
     };
   };
 
-  services.xserver.xkbOptions = "compose:ralt";
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver = {
+    enable = true;
+    xkbOptions = "compose:ralt";
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
-  environment.systemPackages = [ pkgs.xdg-desktop-portal-wlr ];
-  xdg.portal.wlr.enable = true;
+  security.polkit.enable = true;
+
+  systemd.services.polkit-gnome-authentication-agent-1 = {
+    enable = true;
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 }

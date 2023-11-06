@@ -54,8 +54,7 @@
     terminator
     gnome.nautilus
     gparted
-    polkit
-   
+
     # lutris
     # wine
     # wine-wayland
@@ -82,8 +81,6 @@
     okular
   ];
 
-  security.polkit.enable = true;
-
   environment.shellInit = ''export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
   '';
@@ -100,4 +97,3 @@ gpgconf --launch gpg-agent
     };
   };
 }
-

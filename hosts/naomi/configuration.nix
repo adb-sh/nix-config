@@ -79,6 +79,7 @@
   environment.systemPackages = with pkgs; [
     pkgs.yubikey-personalization
     ungoogled-chromium
+    gnome.gnome-control-center
   ];
 
   virtualisation.docker.enable = true;
