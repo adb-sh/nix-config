@@ -51,9 +51,10 @@
     element-desktop
     spotify-qt
     libreoffice
-    terminator
+    kitty
     gnome.nautilus
     gparted
+    ranger
 
     # lutris
     # wine
