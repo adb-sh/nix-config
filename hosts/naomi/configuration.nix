@@ -80,6 +80,16 @@
     pkgs.yubikey-personalization
     ungoogled-chromium
     gnome.gnome-control-center
+
+    # dev
+    pulumi
+    pulumiPackages.pulumi-language-nodejs
+    nodejs_20
+    doctl
+    kubectl
+    kn
+    deno
+    kicad
   ];
 
   virtualisation.docker.enable = true;

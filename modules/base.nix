@@ -55,6 +55,11 @@
     gnome.nautilus
     gparted
     ranger
+    maim
+    xclip
+    dig
+    vim
+    iftop
 
     # lutris
     # wine
