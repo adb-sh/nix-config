@@ -9,6 +9,7 @@
   nixpkgs.config.allowBroken = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
+    "spotify"
   ];
 
   environment.sessionVariables = { GTK_THEME = "Adwaita:dark"; };
@@ -60,6 +61,8 @@
     dig
     vim
     iftop
+    gimp
+    inkscape
 
     # lutris
     # wine
@@ -70,6 +73,7 @@
     grim # screenshotting
 
     termusic # nice music player
+    spotify
 
     # different common fonts for icons 
     dejavu_fonts

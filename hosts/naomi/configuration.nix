@@ -69,7 +69,7 @@
   users.users.adb = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -90,6 +90,8 @@
     kn
     deno
     kicad
+    nodePackages.pnpm
+    podman
   ];
 
   virtualisation.docker.enable = true;
