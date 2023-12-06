@@ -89,6 +89,9 @@
     vscode
     gcc
     okular
+    sops
+    # gnome-keysign
+    gnome.seahorse
   ];
 
   environment.shellInit = ''export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -106,4 +109,6 @@ gpgconf --launch gpg-agent
       startAgent = false;
     };
   };
+
+  services.tailscale.enable = true;
 }
