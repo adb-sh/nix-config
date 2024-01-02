@@ -24,6 +24,8 @@
     };
   };
 
+  environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix {});
+
   services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt";
