@@ -7,10 +7,6 @@
   };
 
   nixpkgs.config.allowBroken = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode"
-    "spotify"
-  ];
 
   environment.sessionVariables = { GTK_THEME = "Adwaita:dark"; };
 
@@ -27,7 +23,7 @@
     enable = true;
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     dejavu_fonts
     font-awesome
     font-awesome_5
@@ -50,7 +46,6 @@
     firefox
     signal-desktop
     element-desktop
-    spotify-qt
     libreoffice
     kitty
     gnome.nautilus
@@ -63,6 +58,11 @@
     iftop
     gimp
     inkscape
+    nmap
+    tsocks
+    bat
+    sshpass
+    exiftool
 
     # lutris
     # wine
@@ -74,6 +74,7 @@
 
     termusic # nice music player
     spotify
+    parsec-bin
 
     # different common fonts for icons 
     dejavu_fonts
@@ -100,7 +101,6 @@ gpgconf --launch gpg-agent
 
   programs = {
     mosh.enable = true;
-    zsh.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -111,4 +111,5 @@ gpgconf --launch gpg-agent
   };
 
   services.tailscale.enable = true;
+  services.flatpak.enable = true;
 }

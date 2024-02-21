@@ -1,12 +1,14 @@
 { pkgs, config, lib, ... }: {
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  programs.zsh.syntaxHighlighting.enable = true;
-  programs.zsh.syntaxHighlighting.highlighters = [
-    "main"
-    "brackets"
-    "pattern"
-    "root"
-    "line"
-  ];
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [
+      "main"
+      "brackets"
+      "pattern"
+      "root"
+      "line"
+    ];
+  };
 }
