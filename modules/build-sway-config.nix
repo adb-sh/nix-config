@@ -1,4 +1,52 @@
 { writeText }:
+let
+i3status-config = writeText "i3status.toml" ''
+icons_format = "{icon}"
+
+[theme]
+theme = "dracula"
+
+[icons]
+icons = "awesome4"
+
+[[block]]
+block = "cpu"
+format = "$icon $barchart $utilization"
+
+[[block]]
+block = "temperature"
+
+[[block]]
+block = "battery"
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon root: $available.eng(w:2) "
+
+[[block]]
+block = "memory"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "time"
+interval = 5
+format = " $timestamp.datetime(f:'%a %Y-%m-%d %T') "
+'';
+
+in
 writeText "sway.conf" ''
 # Default config for sway
 #
@@ -20,7 +68,12 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show drun -i | xargs swaymsg exec --
+
+### Screenshots
+bindsym --to-code $mod+p exec 'grim -g "$(slurp)" - | wl-copy'
+bindsym --to-code $mod+Mod1+p exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png'
 
 ### Output configuration
 #
@@ -206,17 +259,35 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+# bar {
+#     position top
+
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
 bar {
+    font pango:DejaVu Sans Mono, FontAwesome 8
     position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command i3status-rs ${i3status-config}
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
     }
 }
 
