@@ -1,4 +1,5 @@
 { pkgs, config, lib, ... }: {
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -10,5 +11,19 @@
       "root"
       "line"
     ];
+    autosuggestions.enable = true;
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "direnv"
+        "sudo"
+        "dirhistory"
+        "history"
+        "history-substring-search"
+        "timer"
+      ];
+      theme = "robbyrussell";
+    };
   };
 }
