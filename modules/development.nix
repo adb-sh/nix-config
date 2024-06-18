@@ -7,13 +7,19 @@
     doctl
     kubectl
     kn
+    func
     kubernetes-helm
     talosctl
+    hey
     azure-cli
     buildpack
     deno
     kicad
     nodePackages.pnpm
     nodePackages.prisma
+    python3
+    python311Packages.pip
+    freecad
+    colmena
   ];
 }

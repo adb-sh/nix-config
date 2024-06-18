@@ -14,11 +14,11 @@
     accounts-daemon.enable = true;
     printing.enable = true;
     illum.enable = true;
-    yubikey-agent = {
-      enable = true;
-    };
+    yubikey-agent.enable = true;
     udev.packages = [ pkgs.yubikey-personalization ];
+    gnome.gnome-keyring.enable = true;
   };
+
   fonts.fontconfig = {
     enable = true;
   };
@@ -63,8 +63,11 @@
     bat
     sshpass
     exiftool
+    gnome.gnome-disk-utility
+    gnome.geary
+    evince
 
-    # lutris
+    # lutrisgnome.geary
     # wine
     # wine-wayland
     # winePackages.full

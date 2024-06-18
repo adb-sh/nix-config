@@ -24,17 +24,21 @@
     };
   };
 
-  environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix {});
+  environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix { });
 
   services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt";
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
+    displayManager = {
+      defaultSession = "sway";
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
     };
   };
 
+  environment.systemPackages = [ pkgs.xdg-desktop-portal-wlr ];
   xdg.portal = {
     enable = true;
     wlr.enable = true;
