@@ -72,8 +72,8 @@ set $term kitty
 set $menu wofi --show drun -i | xargs swaymsg exec --
 
 ### Screenshots
-bindsym --to-code $mod+p exec 'grim -g "$(slurp)" - | wl-copy'
-bindsym --to-code $mod+Mod1+p exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png'
+bindsym --to-code Print exec 'grim -g "$(slurp)" - | wl-copy'
+bindsym --to-code Shift+Print exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png'
 
 ### Output configuration
 #

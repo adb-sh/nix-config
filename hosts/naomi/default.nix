@@ -10,6 +10,14 @@
       # Include the results of the hardware scan.
       ./network.nix
       ./hardware-configuration.nix
+
+      ../../modules/base.nix
+      ../../modules/base-desktop.nix
+      ../../modules/wayland.nix
+      ../../modules/pipewire.nix
+      ../../modules/bluetooth.nix
+      ../../modules/zsh.nix
+      ../../modules/development.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
