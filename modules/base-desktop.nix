@@ -27,6 +27,7 @@
     signal-desktop
     element-desktop
     libreoffice
+    scribus
     kitty
     gnome.nautilus
     gparted
@@ -39,9 +40,10 @@
     evince
     termusic # nice music player
     spotify
-    parsec-bin
+    # parsec-bin
     slurp # screenshotting
     grim # screenshotting
+    loupe
 
     # different common fonts for icons 
     dejavu_fonts
@@ -61,6 +63,8 @@
     # gnome-keysign
     gnome.seahorse
   ];
+
+  programs.direnv.enable = true;
 
   environment.shellInit = ''export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent

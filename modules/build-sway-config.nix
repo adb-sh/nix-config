@@ -78,7 +78,8 @@ bindsym --to-code Shift+Print exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/adb/Wallpapers/federico-bottos-uWmWoH9maR4-unsplash.jpg fill
 #
 # Example configuration:
 #

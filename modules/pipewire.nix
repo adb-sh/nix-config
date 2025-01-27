@@ -3,7 +3,7 @@
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
 
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio = {
     enable = false;
     zeroconf.discovery.enable = true;

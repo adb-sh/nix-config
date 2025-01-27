@@ -33,6 +33,7 @@
     sshpass
     exiftool
     sops
+    zip
   ];
 
   services.tailscale.enable = true;

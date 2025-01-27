@@ -18,6 +18,7 @@
       ../../modules/bluetooth.nix
       ../../modules/zsh.nix
       ../../modules/development.nix
+      ../../modules/gaming.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -46,7 +47,7 @@
   hardware.opengl = {
     extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     extraPackages = [ pkgs.amdvlk ];
-    driSupport = true;
+    # driSupport = true;
     driSupport32Bit = true;
   };
 
@@ -68,7 +69,7 @@
   users.users.adb = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -79,8 +80,10 @@
     "steam"
     "steam-original"
     "steam-run"
-    "parsec-bin"
+    "steam-unwrapped"
+    # "parsec-bin"
     "terraform"
+    "vagrant"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -92,6 +95,7 @@
     openrgb
     obs-studio
     obs-studio
+    ollama
   ];
 
   virtualisation.docker.enable = true;
