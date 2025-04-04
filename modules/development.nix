@@ -33,6 +33,9 @@
     libarchive
     imagemagick
     kind
+    kubelogin-oidc
+    go
+    stu
   ];
   virtualisation.libvirtd = {
     enable = true;
