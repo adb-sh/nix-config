@@ -36,6 +36,8 @@
     kubelogin-oidc
     go
     stu
+    gnumake
+    jq
   ];
   virtualisation.libvirtd = {
     enable = true;
