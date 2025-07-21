@@ -75,6 +75,15 @@ set $menu wofi --show drun -i | xargs swaymsg exec --
 bindsym --to-code Print exec 'grim -g "$(slurp)" - | wl-copy'
 bindsym --to-code Shift+Print exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m-%d-%H-%M-%S").png'
 
+### Audio
+bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)

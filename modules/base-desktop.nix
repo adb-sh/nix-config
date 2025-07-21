@@ -44,6 +44,8 @@
     slurp # screenshotting
     grim # screenshotting
     loupe
+    pamixer
+    playerctl
 
     # different common fonts for icons 
     dejavu_fonts
@@ -59,6 +61,7 @@
     vscode
     gcc
     okular
+    wev
 
     # gnome-keysign
     gnome.seahorse

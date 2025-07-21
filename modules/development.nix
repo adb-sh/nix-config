@@ -11,7 +11,6 @@
     kubernetes-helm
     talosctl
     hey
-    azure-cli
     buildpack
     deno
     kicad
@@ -38,6 +37,9 @@
     stu
     gnumake
     jq
+    cue
+    krew
+    timoni
   ];
   virtualisation.libvirtd = {
     enable = true;
