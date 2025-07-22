@@ -19,7 +19,8 @@
     dejavu_fonts
     font-awesome
     font-awesome_5
-    nerdfonts
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
   ];
 
   environment.systemPackages = with pkgs; [
@@ -29,14 +30,14 @@
     libreoffice
     scribus
     kitty
-    gnome.nautilus
+    nautilus
     gparted
     maim
     xclip
     gimp
     inkscape
-    gnome.gnome-disk-utility
-    gnome.geary
+    gnome-disk-utility
+    geary
     evince
     termusic # nice music player
     spotify
@@ -60,11 +61,10 @@
     # development
     vscode
     gcc
-    okular
     wev
 
     # gnome-keysign
-    gnome.seahorse
+    seahorse
   ];
 
   programs.direnv.enable = true;

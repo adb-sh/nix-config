@@ -12,7 +12,7 @@
         alacritty
         wofi
         wofi-emoji
-        gnome.adwaita-icon-theme
+        adwaita-icon-theme
         i3status-rust
         swayr
         dmenu

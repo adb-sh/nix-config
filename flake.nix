@@ -1,7 +1,7 @@
 {
   description = "my based nix configs :3";
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-24.11;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-25.05;
     sops.url = github:mic92/sops-nix;
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators = {

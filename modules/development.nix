@@ -26,7 +26,7 @@
     kustomize-sops
     kubeseal
     k9s
-    dive
+    dive 
     virt-manager
     vagrant
     libarchive
@@ -40,6 +40,8 @@
     cue
     krew
     timoni
+    kcl
+    kcl-language-server
   ];
   virtualisation.libvirtd = {
     enable = true;

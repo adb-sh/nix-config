@@ -89,13 +89,14 @@
   environment.systemPackages = with pkgs; [
     pkgs.yubikey-personalization
     ungoogled-chromium
-    gnome.gnome-control-center
+    gnome-control-center
     virt-manager
     speedtest-cli
     openrgb
     obs-studio
     obs-studio
     ollama
+    rawtherapee
   ];
 
   virtualisation.docker.enable = true;
