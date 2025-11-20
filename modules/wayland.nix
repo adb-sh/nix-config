@@ -20,6 +20,7 @@
         xdg-desktop-portal-wlr
         polkit
         polkit_gnome
+        lxde.lxsession
       ];
     };
   };

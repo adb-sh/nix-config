@@ -42,6 +42,12 @@
     timoni
     kcl
     kcl-language-server
+    gleam
+    erlang
+    elixir
+    opentofu
+    vimPlugins.LazyVim
+    s3cmd
   ];
   virtualisation.libvirtd = {
     enable = true;

@@ -47,6 +47,9 @@
     loupe
     pamixer
     playerctl
+    ffmpeg-full
+    vlc
+    audacity
 
     # different common fonts for icons 
     dejavu_fonts
