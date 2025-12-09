@@ -15,13 +15,23 @@
     enable = true;
   };
 
-  fonts.packages = with pkgs; [
-    dejavu_fonts
-    font-awesome
-    font-awesome_5
-    nerd-fonts._0xproto
-    nerd-fonts.droid-sans-mono
-  ];
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.fira-code
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
+      ubuntu_font_family
+      dejavu_fonts
+      font-awesome
+    ];
+    fontconfig = {
+      defaultFonts = {
+        serif = [  "Ubuntu" "Vazirmatn" ];
+        sansSerif = [ "monospace" "Vazirmatn" ];
+        monospace = [ "fira-code" ];
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     firefox
@@ -52,10 +62,10 @@
     audacity
 
     # different common fonts for icons 
-    dejavu_fonts
-    font-awesome
-    font-awesome_5
-    unicode-emoji
+    # dejavu_fonts
+    # font-awesome
+    # font-awesome_5
+    # unicode-emoji
 
     # audio foo
     pulsemixer
