@@ -48,6 +48,9 @@
     opentofu
     vimPlugins.LazyVim
     s3cmd
+    kotlin
+    gradle
+    openjdk-headless.java
   ];
   virtualisation.libvirtd = {
     enable = true;
