@@ -20,7 +20,7 @@
         xdg-desktop-portal-wlr
         polkit
         polkit_gnome
-        lxde.lxsession
+        lxsession
       ];
     };
   };
@@ -29,13 +29,15 @@
 
   services.xserver = {
     enable = true;
-    xkbOptions = "compose:ralt";
-    displayManager = {
-      defaultSession = "sway";
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
+    xkb = {
+      layout = "us";
+    };
+  };
+
+  services.displayManager = {
+    defaultSession = "sway";
+    lemurs = {
+      enable = true;
     };
   };
 

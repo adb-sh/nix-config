@@ -3,7 +3,7 @@
     # terraform
     # pulumi
     # pulumiPackages.pulumi-language-nodejs
-    nodejs_20
+    # nodejs_20
     doctl
     kubectl
     kn
@@ -18,7 +18,7 @@
     nodePackages.prisma
     python3
     python311Packages.pip
-    freecad
+    # freecad
     colmena
     qlcplus
     age
@@ -26,7 +26,7 @@
     kustomize-sops
     kubeseal
     k9s
-    dive 
+    dive
     virt-manager
     vagrant
     libarchive
@@ -39,18 +39,16 @@
     jq
     cue
     krew
-    timoni
-    kcl
-    kcl-language-server
-    gleam
-    erlang
-    elixir
-    opentofu
+    # timoni
+    # kcl
+    # kcl-language-server
+    # gleam
+    # erlang
+    # elixir
+    # opentofu
     vimPlugins.LazyVim
     s3cmd
-    kotlin
-    gradle
-    openjdk-headless.java
+    zed-editor
   ];
   virtualisation.libvirtd = {
     enable = true;
@@ -58,15 +56,15 @@
       package = pkgs.qemu_kvm;
       runAsRoot = true;
       swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [
-          (pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
-      };
+      # ovmf = {
+      #   enable = true;
+      #   packages = [
+      #     (pkgs.OVMF.override {
+      #       secureBoot = true;
+      #       tpmSupport = true;
+      #     }).fd
+      #   ];
+      # };
     };
   };
 }

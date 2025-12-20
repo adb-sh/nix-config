@@ -14,7 +14,7 @@
     acpi # battery stuff
     home-manager # managing homespace and user software
     alsa-utils # audio controll
-    pinentry # password entry window required for gpg
+    pinentry-curses # password entry window required for gpg
     dconf # required by paprefs
     nix-index # indexing nix packages
     wget

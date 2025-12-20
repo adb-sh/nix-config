@@ -20,15 +20,15 @@
       nerd-fonts.fira-code
       nerd-fonts._0xproto
       nerd-fonts.droid-sans-mono
-      ubuntu_font_family
+      ubuntu-classic
       dejavu_fonts
       font-awesome
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [  "Ubuntu" "Vazirmatn" ];
-        sansSerif = [ "monospace" "Vazirmatn" ];
-        monospace = [ "fira-code" ];
+        serif = [  "Ubuntu" ];
+        sansSerif = [ "0xProto Nerd Font" ];
+        monospace = [ "FiraCode Nerd Font" ];
       };
     };
   };
@@ -38,7 +38,7 @@
     signal-desktop
     element-desktop
     libreoffice
-    scribus
+    # scribus
     kitty
     nautilus
     gparted
@@ -61,7 +61,7 @@
     vlc
     audacity
 
-    # different common fonts for icons 
+    # different common fonts for icons
     # dejavu_fonts
     # font-awesome
     # font-awesome_5
@@ -97,4 +97,3 @@ gpgconf --launch gpg-agent
     };
   };
 }
-

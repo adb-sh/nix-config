@@ -41,23 +41,6 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  hardware.opengl = {
-    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-    extraPackages = [ pkgs.amdvlk ];
-    # driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -69,7 +52,7 @@
   users.users.adb = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "docker" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "libvirtd" "seat" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };

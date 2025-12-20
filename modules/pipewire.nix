@@ -1,10 +1,10 @@
 { pkgs, config, lib, ... }: {
   # device network discovery
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
 
   # sound.enable = true;
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     zeroconf.discovery.enable = true;
     extraClientConf = ''
