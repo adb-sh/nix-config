@@ -23,6 +23,10 @@
         lxsession
       ];
     };
+    # hyprland = {
+    #   enable = true;
+    #   xwayland.enable = true;
+    # };
   };
 
   environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix { });
@@ -36,9 +40,7 @@
 
   services.displayManager = {
     defaultSession = "sway";
-    lemurs = {
-      enable = true;
-    };
+    ly.enable = true;
   };
 
   environment.systemPackages = [ pkgs.xdg-desktop-portal-wlr ];

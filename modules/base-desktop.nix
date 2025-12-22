@@ -60,6 +60,7 @@
     ffmpeg-full
     vlc
     audacity
+    freetube
 
     # different common fonts for icons
     # dejavu_fonts

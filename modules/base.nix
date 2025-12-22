@@ -34,6 +34,7 @@
     exiftool
     sops
     zip
+    gitui
   ];
 
   services.tailscale.enable = true;

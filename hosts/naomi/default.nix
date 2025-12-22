@@ -41,6 +41,8 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
+  # catppuccin.enable = true;
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -77,8 +79,6 @@
     speedtest-cli
     openrgb
     obs-studio
-    obs-studio
-    ollama
     rawtherapee
   ];
 

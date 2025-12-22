@@ -8,6 +8,11 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix/v25.05";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self
@@ -15,6 +20,8 @@
     , sops
     , nixos-hardware
     , nixos-generators
+    , catppuccin
+    , home-manager
     }: {
       nixosConfigurations = {
 
@@ -22,6 +29,16 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/naomi
+            catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.users.adb = {
+                imports = [
+                  catppuccin.homeModules.catppuccin
+                  ./hosts/naomi/home.nix
+                ];
+              };
+            }
           ];
         };
 
