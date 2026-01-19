@@ -35,6 +35,7 @@
     sops
     zip
     gitui
+    killall
   ];
 
   services.tailscale.enable = true;

@@ -1,4 +1,4 @@
-{ writeText }:
+{ writeText, pkgs }:
 let
 i3status-config = writeText "i3status.toml" ''
 icons_format = "{icon}"
@@ -77,6 +77,7 @@ bindsym --to-code Shift+Print exec 'grim -g "$(slurp)" ~/Pictures/$(date +"%Y-%m
 
 ### Audio
 bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioMicMute exec pamixer --default-source -t
 bindsym XF86AudioLowerVolume exec pamixer -d 5
 bindsym XF86AudioRaiseVolume exec pamixer -i 5
 
@@ -88,7 +89,7 @@ bindsym XF86AudioNext exec playerctl next
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 # output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/adb/Wallpapers/federico-bottos-uWmWoH9maR4-unsplash.jpg fill
+output * bg /home/adb/Wallpapers/DSC03135.JPG fill
 #
 # Example configuration:
 #
@@ -108,7 +109,23 @@ output * bg /home/adb/Wallpapers/federico-bottos-uWmWoH9maR4-unsplash.jpg fill
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w timeout 1200 'swaylock-fancy -p'
+
+set $lockcommand '${pkgs.swaylock-effects}/bin/swaylock \
+  -i /home/adb/Wallpapers/DSC03135.JPG \
+  --daemonize \
+  --clock \
+  --indicator-idle-visible \
+  --grace 2 \
+  --indicator-radius 100 \
+  --datestr "%Y-%m-%d"
+  --fade-in 15 \
+  --grace 15'
+
+exec swayidle -w \
+  timeout 500 '$lockcommand --grace 15 --fade-in 15'
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep '$lockcommand'
 
 ### Input configuration
 #
@@ -138,7 +155,7 @@ exec swayidle -w timeout 1200 'swaylock-fancy -p'
     bindsym $mod+d exec $menu
 
     # Lock
-    bindsym $mod+p exec swaylock-fancy -p
+    bindsym $mod+p exec '$lockcommand'
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

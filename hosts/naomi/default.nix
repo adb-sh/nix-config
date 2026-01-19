@@ -71,6 +71,10 @@
     "vagrant"
   ];
 
+  programs.streamcontroller = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     pkgs.yubikey-personalization
     ungoogled-chromium
@@ -81,6 +85,14 @@
     obs-studio
     rawtherapee
   ];
+
+  # obs stuff
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;

@@ -49,6 +49,8 @@
     vimPlugins.LazyVim
     s3cmd
     zed-editor
+    yq
+    traceroute
   ];
   virtualisation.libvirtd = {
     enable = true;
@@ -66,5 +68,10 @@
       #   ];
       # };
     };
+  };
+
+  services.ollama = {
+    enable = true;
+    loadModels = [ "llama3.2:3b" "deepseek-r1:1.5b" "codellama"];
   };
 }
