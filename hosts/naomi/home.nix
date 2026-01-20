@@ -9,10 +9,133 @@
     swaylock.enable = true;
   };
   # wayland.windowManager.sway.enable = true; # todo
+  wayland.windowManager.hyprland = {
+    enable = true;
+    plugins = [ 
+      "${pkgs.hyprlandPlugins.hy3}/lib/libhy3.so"
+    ];
+    settings = {
+      plugin.hy3 = {
+        no_gaps_when_only = 1;
+        tabs = {
+          height = 22;
+          padding = 8;
+          radius = 8;
+          border_width = 2;
+          from_top = true;
+          "col.active" = "$surface2";
+          "col.focused" = "$surface1";
+          "col.active.border" = "$accent";
+          "col.focused.border" = "$accent";
+        };
+      };
+      monitor = [
+        "eDP-1, 1920x1080@60, 0x0, 1"
+        "DP-1, 5120x2160@60, auto-center-right, 1"
+      ];
+      general = {
+        layout = "hy3";
+        resize_on_border = true;
+        gaps_in = 4;
+        gaps_out = 4;
+        border_size = 2;
+        "col.active_border" = "$accent";
+        "col.inactive_border" = "$surface1";
+        # todo: add backgroud color
+      };
+      decoration = {
+        rounding = 8;
+        rounding_power = 2;
+        active_opacity = 1.0;
+        inactive_opacity = 1.0;
+      };
+      bezier = [
+        "easeOutQuint,   0.23, 1,    0.32, 1"
+        "easeInOutCubic, 0.65, 0.05, 0.36, 1"
+        "linear,         0,    0,    1,    1"
+        "almostLinear,   0.5,  0.5,  0.75, 1"
+        "quick,          0.15, 0,    0.1,  1"
+      ];
+      animation = [
+        "global, 1, 2, easeOutQuint"
+        "workspaces, 1, 2, almostLinear, slidevert"
+      ];
+      "$mod" = "SUPER";
+      bindm = [
+        # mouse movements
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+        "$mod ALT, mouse:272, resizewindow"
+
+      ];
+      bind = [
+        "$mod, l, exec, caelestia-shell ipc call drawers toggle launcher"
+
+        # todo: toggle floating with mod + space
+        # todo: switch workspace w/o mouse
+
+        # Scroll through existing workspaces with mainMod + scroll
+        "$mod, mouse_down, workspace, e-1"
+        "$mod, mouse_up, workspace, e+1"
+
+        # group / split
+        "$mod, v, hy3:makegroup, h"
+        "$mod, b, hy3:makegroup, v"
+        "$mod SHIFT, t, hy3:makegroup, tab"
+
+        # layout switching
+        "$mod, s, hy3:changegroup, stacked"
+        "$mod, w, hy3:changegroup, tab"
+        "$mod, e, hy3:changegroup, toggletab"
+
+        # classic window controls
+        "$mod SHIFT, q, killactive"
+        "$mod, f, fullscreen"
+        "$mod SHIFT, space, togglefloating"
+
+        # shortcuts
+        "$mod, Return, exec, kitty"
+
+        # focus
+        "$mod, left,  hy3:movefocus, l"
+        "$mod, down,  hy3:movefocus, d"
+        "$mod, up,    hy3:movefocus, u"
+        "$mod, right, hy3:movefocus, r"
+
+        # move
+        "$mod SHIFT, left,  hy3:movewindow, l"
+        "$mod SHIFT, down,  hy3:movewindow, d"
+        "$mod SHIFT, up,    hy3:movewindow, u"
+        "$mod SHIFT, right, hy3:movewindow, r"
+
+      ];
+    };
+  };
   catppuccin = {
     enable = true;
     accent = "mauve";
     cursors.enable = true;
+  };
+
+  programs.caelestia = {
+    enable = true;
+    settings = {
+      apperance = {
+        anim.durations.scale = .5;
+        font.family = {
+          mono = "FiraCode Nerd Font";
+          sans = "0xProto Nerd Font";
+        };
+      };
+      bar.status = {
+        showBattery = false;
+      };
+      border = {
+        thickness = 8;
+        rounding = 12;
+      };
+      services.useFahrenheit = false;
+    };
   };
 
   # programs.zed-editor = {

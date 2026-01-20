@@ -13,6 +13,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self
@@ -22,6 +26,7 @@
     , nixos-generators
     , catppuccin
     , home-manager
+    , caelestia-shell
     }: {
       nixosConfigurations = {
 
@@ -32,11 +37,22 @@
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
-              home-manager.users.adb = {
-                imports = [
-                  catppuccin.homeModules.catppuccin
-                  ./hosts/naomi/home.nix
-                ];
+              nixpkgs.overlays = [
+                (final: prev: {
+                  inherit  (caelestia-shell.packages.${prev.system}) caelestia-shell;
+                })
+              ];
+            }
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                users.adb = {
+                  imports = [
+                    catppuccin.homeModules.catppuccin
+                    caelestia-shell.homeManagerModules.default
+                    ./hosts/naomi/home.nix
+                  ];
+                };
               };
             }
           ];

@@ -23,10 +23,10 @@
         lxsession
       ];
     };
-    # hyprland = {
-    #   enable = true;
-    #   xwayland.enable = true;
-    # };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix { });
@@ -43,7 +43,10 @@
     ly.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.xdg-desktop-portal-wlr ];
+  environment.systemPackages = [
+    pkgs.xdg-desktop-portal-wlr
+    pkgs.hyprlandPlugins.hy3
+  ];
   xdg.portal = {
     enable = true;
     wlr.enable = true;
