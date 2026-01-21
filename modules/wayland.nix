@@ -2,14 +2,14 @@
   programs = {
     xwayland.enable = true;
     sway = {
-      enable = true;
+      enable = false;
       wrapperFeatures.gtk = true;
       extraPackages = with pkgs; [
         # swaylock-fancy
         swayidle
         wl-clipboard
-        mako
-        alacritty
+        # mako
+        # alacritty
         wofi
         wofi-emoji
         adwaita-icon-theme

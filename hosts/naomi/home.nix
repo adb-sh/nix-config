@@ -11,7 +11,7 @@
   # wayland.windowManager.sway.enable = true; # todo
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = [ 
+    plugins = [
       "${pkgs.hyprlandPlugins.hy3}/lib/libhy3.so"
     ];
     settings = {
@@ -69,14 +69,20 @@
 
       ];
       bind = [
+        # open launcher with mod + L
         "$mod, l, exec, caelestia-shell ipc call drawers toggle launcher"
 
-        # todo: toggle floating with mod + space
-        # todo: switch workspace w/o mouse
-
-        # Scroll through existing workspaces with mainMod + scroll
+        # scroll through existing workspaces with mod + scroll
         "$mod, mouse_down, workspace, e-1"
         "$mod, mouse_up, workspace, e+1"
+
+        # tab through existing workspaces
+        "$mod, TAB, workspace, e+1"
+        "$mod SHIFT, TAB, workspace, e-1"
+
+        # move window
+        # "$mod ALT SHIFT, down, movetoworkspace, e+1"
+        # "$mod ALT SHIFT, up, movetoworkspace, e-1"
 
         # group / split
         "$mod, v, hy3:makegroup, h"
@@ -91,7 +97,7 @@
         # classic window controls
         "$mod SHIFT, q, killactive"
         "$mod, f, fullscreen"
-        "$mod SHIFT, space, togglefloating"
+        "$mod, space, togglefloating"
 
         # shortcuts
         "$mod, Return, exec, kitty"
@@ -107,8 +113,16 @@
         "$mod SHIFT, down,  hy3:movewindow, d"
         "$mod SHIFT, up,    hy3:movewindow, u"
         "$mod SHIFT, right, hy3:movewindow, r"
-
-      ];
+      ] ++ (
+        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+        builtins.concatLists (builtins.genList (i:
+          let ws = i + 1;
+          in [
+            "$mod, code:1${toString i}, workspace, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          ]
+        ) 9)
+      );
     };
   };
   catppuccin = {
@@ -125,16 +139,47 @@
         font.family = {
           mono = "FiraCode Nerd Font";
           sans = "0xProto Nerd Font";
+          clock = "0xProto Nerd Font";
+          material = "Material Symbols Rounded";
         };
       };
-      bar.status = {
-        showBattery = false;
+      bar = {
+        status = {
+          showBattery = false;
+        };
+        entries = [
+          {id = "logo"; enabled = true;}
+          {id = "workspaces"; enabled = true;}
+          {id = "spacer"; enabled = true;}
+          {id = "tray"; enabled = true;}
+          {id = "clock"; enabled = true;}
+          {id = "statusIcons"; enabled = true;}
+          {id = "power"; enabled = true;}
+        ];
+        workspaces = {
+          activeIndicator = true;
+          activeLabel = "󰮯";
+          activeTrail = false;
+          label = "●";
+          occupiedBg = false;
+          occupiedLabel = "_";
+          perMonitorWorkspaces = true;
+          showWindows = true;
+          shown = 5;
+        };
       };
       border = {
         thickness = 8;
         rounding = 12;
       };
-      services.useFahrenheit = false;
+      services = {
+        useFahrenheit = false;
+        useTwelveHourClock = false;
+      };
+      background = {
+        enabled = true;
+        desktopClock.enabled = true;
+      };
     };
   };
 
