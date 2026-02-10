@@ -8,7 +8,6 @@
     freetube.enable = true;
     swaylock.enable = true;
   };
-  # wayland.windowManager.sway.enable = true; # todo
   wayland.windowManager.hyprland = {
     enable = true;
     plugins = [
@@ -23,8 +22,11 @@
           radius = 8;
           border_width = 2;
           from_top = true;
-          "col.active" = "$surface2";
-          "col.focused" = "$surface1";
+          blur = false;
+          opacity = .6;
+          "col.active" = "$surface0";
+          "col.focused" = "$base";
+          "col.inactive" = "$mantle";
           "col.active.border" = "$accent";
           "col.focused.border" = "$accent";
         };
@@ -68,9 +70,26 @@
         "$mod ALT, mouse:272, resizewindow"
 
       ];
+      bindl = [
+        # Laptop multimedia keys for volume and LCD brightness
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+
+        # Requires playerctl
+        ",XF86AudioNext, exec, playerctl next"
+        ",XF86AudioPause, exec, playerctl play-pause"
+        ",XF86AudioPlay, exec, playerctl play-pause"
+        ",XF86AudioPrev, exec, playerctl previous"
+      ];
       bind = [
-        # open launcher with mod + L
-        "$mod, l, exec, caelestia-shell ipc call drawers toggle launcher"
+        # lock screen
+        "$mod, l, exec, caelestia-shell ipc call ipc call lock lock"
+        # open launcher
+        "$mod, slash, exec, caelestia-shell ipc call drawers toggle launcher"
 
         # scroll through existing workspaces with mod + scroll
         "$mod, mouse_down, workspace, e-1"
@@ -92,7 +111,7 @@
         # layout switching
         "$mod, s, hy3:changegroup, stacked"
         "$mod, w, hy3:changegroup, tab"
-        "$mod, e, hy3:changegroup, toggletab"
+        "$mod, e, hy3:changegroup, opposite"
 
         # classic window controls
         "$mod SHIFT, q, killactive"
@@ -172,6 +191,10 @@
         thickness = 8;
         rounding = 12;
       };
+      notifs = {
+        actionOnClick = true;
+        openExpanded = true;
+      };
       services = {
         useFahrenheit = false;
         useTwelveHourClock = false;
@@ -183,38 +206,49 @@
     };
   };
 
-  # programs.zed-editor = {
-  #   enable = true;
+  programs.zed-editor = {
+    # enable = true;
 
-  #   extensions = [
-  #     "nix"
-  #     "toml"
-  #     "gleam"
-  #     "kotlin"
-  #   ];
+    extensions = [
+      "nix"
+      "toml"
+      "gleam"
+      "kotlin"
+    ];
 
-  #   # settings.json rendered by HM
-  #   userSettings = {
-  #     # tell Zed which LSP to use for Kotlin
-  #     languages = {
-  #       "Kotlin" = {
-  #         language_servers = [ "kotlin-language-server" ];
-  #       };
-  #     };
+    # settings.json rendered by HM
+    userSettings = {
+      # tell Zed which LSP to use for Kotlin
+      languages = {
+        # "Kotlin" = {
+        #   language_servers = [ "kotlin-language-server" ];
+        # };
+      };
 
-  #     # point Zed at the correct LSP binary
-  #     lsp = {
-  #       "kotlin-language-server" = {
-  #         binary = {
-  #           # if PATH detection is flaky on NixOS
-  #           path = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
-  #         };
-  #         # optional: make sure Java sees the right JDK
-  #         binary.env = {
-  #           JAVA_HOME = "${pkgs.jdk17}";
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
+      # point Zed at the correct LSP binary
+      lsp = {
+        rust-analyzer = {
+          initialization_options = {
+            diagnostics = {
+              enable = true;
+            };
+          };
+          binary = {
+            path = lib.getExe pkgs.rust-analyzer;
+            # path_lookup = true;
+          };
+        };
+        # "kotlin-language-server" = {
+        #   binary = {
+        #     # if PATH detection is flaky on NixOS
+        #     path = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
+        #   };
+        #   # optional: make sure Java sees the right JDK
+        #   binary.env = {
+        #     JAVA_HOME = "${pkgs.jdk17}";
+        #   };
+        # };
+      };
+    };
+  };
 }

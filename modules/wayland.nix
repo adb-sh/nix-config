@@ -39,17 +39,17 @@
   };
 
   services.displayManager = {
-    defaultSession = "sway";
+    defaultSession = "hyprland";
     ly.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.xdg-desktop-portal-wlr
-    pkgs.hyprlandPlugins.hy3
-  ];
+  # environment.systemPackages = [
+  #   pkgs.xdg-desktop-portal-wlr
+  #   pkgs.hyprlandPlugins.hy3
+  # ];
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   security.polkit.enable = true;

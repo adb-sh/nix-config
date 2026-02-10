@@ -51,6 +51,7 @@
     zed-editor
     yq
     traceroute
+    unixtools.net-tools
   ];
   virtualisation.libvirtd = {
     enable = true;
