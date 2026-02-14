@@ -28,7 +28,7 @@
     k9s
     dive
     virt-manager
-    vagrant
+    # vagrant
     libarchive
     imagemagick
     kind

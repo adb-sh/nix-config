@@ -50,7 +50,7 @@
     geary
     evince
     termusic # nice music player
-    spotify
+    # spotify
     # parsec-bin
     slurp # screenshotting
     grim # screenshotting
@@ -61,6 +61,7 @@
     vlc
     audacity
     freetube
+    tidal-hifi
 
     # different common fonts for icons
     # dejavu_fonts
@@ -73,7 +74,7 @@
     blueberry
 
     # development
-    vscode
+    # vscode
     gcc
     wev
 

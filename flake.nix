@@ -58,6 +58,34 @@
           ];
         };
 
+        aven = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/aven
+            catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  inherit  (caelestia-shell.packages.${prev.system}) caelestia-shell;
+                })
+              ];
+            }
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                users.adb = {
+                  imports = [
+                    catppuccin.homeModules.catppuccin
+                    caelestia-shell.homeManagerModules.default
+                    ./hosts/aven/home.nix
+                  ];
+                };
+              };
+            }
+          ];
+        };
+
         home = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
