@@ -8,6 +8,11 @@
     freetube.enable = true;
     swaylock.enable = true;
   };
+  catppuccin = {
+    enable = true;
+    accent = "green";
+    cursors.enable = true;
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     plugins = [
@@ -50,6 +55,11 @@
         rounding_power = 2;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
+        blur = {
+          enabled = true;
+          size = 2;
+          passes = 4;
+        };
       };
       bezier = [
         "easeOutQuint,   0.23, 1,    0.32, 1"
@@ -62,13 +72,17 @@
         "global, 1, 2, easeOutQuint"
         "workspaces, 1, 2, almostLinear, slidevert"
       ];
+      windowrule = [
+        "opacity 0.9 override 0.9 override 0.9 override, class:kitty"
+        "opacity 0.9 override 0.9 override 0.9 override, class:dev.zed.Zed"
+      ];
+
       "$mod" = "SUPER";
       bindm = [
         # mouse movements
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
         "$mod ALT, mouse:272, resizewindow"
-
       ];
       bindl = [
         # Laptop multimedia keys for volume and LCD brightness
@@ -143,11 +157,6 @@
         ) 9)
       );
     };
-  };
-  catppuccin = {
-    enable = true;
-    accent = "mauve";
-    cursors.enable = true;
   };
 
   programs.caelestia = {
