@@ -227,6 +227,8 @@
 
     # settings.json rendered by HM
     userSettings = {
+      base_keymap = "JetBrains";
+
       # tell Zed which LSP to use for Kotlin
       languages = {
         # "Kotlin" = {
@@ -254,6 +256,13 @@
           binary.env = {
             JAVA_HOME = "${pkgs.jdk17}";
           };
+        };
+      };
+
+      agent = {
+        "default_model" = {
+          provider = "ollama";
+          model = "gpt-oss:20b";
         };
       };
     };

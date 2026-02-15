@@ -61,6 +61,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "castlabs-electron"
+    "open-webui"
   ];
 
   programs.streamcontroller = {

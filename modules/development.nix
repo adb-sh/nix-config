@@ -74,5 +74,10 @@
   services.ollama = {
     enable = true;
     loadModels = [ "llama3.2:3b" "deepseek-r1:1.5b" "codellama"];
+    package = pkgs.ollama-vulkan;
+  };
+  services.open-webui = {
+    enable = true;
+    port = 9000;
   };
 }
