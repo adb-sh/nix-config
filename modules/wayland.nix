@@ -1,35 +1,16 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}:
+{
   programs = {
     xwayland.enable = true;
-    sway = {
-      enable = false;
-      wrapperFeatures.gtk = true;
-      extraPackages = with pkgs; [
-        # swaylock-fancy
-        swayidle
-        wl-clipboard
-        # mako
-        # alacritty
-        wofi
-        wofi-emoji
-        adwaita-icon-theme
-        i3status-rust
-        swayr
-        dmenu
-        #dmenu-wayland
-        xdg-desktop-portal-wlr
-        polkit
-        polkit_gnome
-        lxsession
-      ];
-    };
     hyprland = {
       enable = true;
       xwayland.enable = true;
     };
   };
-
-  environment.etc."sway/config".source = lib.mkForce (pkgs.callPackage ./build-sway-config.nix { });
 
   services.xserver = {
     enable = true;
@@ -43,14 +24,19 @@
     ly.enable = true;
   };
 
-  # environment.systemPackages = [
-  #   pkgs.xdg-desktop-portal-wlr
-  #   pkgs.hyprlandPlugins.hy3
-  # ];
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    config = {
+      common = {
+        default = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   security.polkit.enable = true;
 

@@ -1,4 +1,10 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   environment.systemPackages = with pkgs; [
     # terraform
     # pulumi
@@ -59,21 +65,17 @@
       package = pkgs.qemu_kvm;
       runAsRoot = true;
       swtpm.enable = true;
-      # ovmf = {
-      #   enable = true;
-      #   packages = [
-      #     (pkgs.OVMF.override {
-      #       secureBoot = true;
-      #       tpmSupport = true;
-      #     }).fd
-      #   ];
-      # };
     };
   };
 
   services.ollama = {
     enable = true;
-    loadModels = [ "llama3.2:3b" "deepseek-r1:1.5b" "codellama"];
+    loadModels = [
+      "llama3.2:3b"
+      "deepseek-r1:1.5b"
+      "codellama"
+      "gpt-oss:20b"
+    ];
     package = pkgs.ollama-vulkan;
   };
   services.open-webui = {

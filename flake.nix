@@ -1,8 +1,7 @@
 {
   description = "my based nix configs :3";
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-25.11;
-    sops.url = github:mic92/sops-nix;
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -19,15 +18,16 @@
     };
   };
   outputs =
-    { self
-    , nixpkgs
-    , sops
-    , nixos-hardware
-    , nixos-generators
-    , catppuccin
-    , home-manager
-    , caelestia-shell
-    }: {
+    {
+      self,
+      nixpkgs,
+      nixos-hardware,
+      nixos-generators,
+      catppuccin,
+      home-manager,
+      caelestia-shell,
+    }:
+    {
       nixosConfigurations = {
 
         naomi = nixpkgs.lib.nixosSystem {
@@ -39,7 +39,7 @@
             {
               nixpkgs.overlays = [
                 (final: prev: {
-                  inherit  (caelestia-shell.packages.${prev.system}) caelestia-shell;
+                  inherit (caelestia-shell.packages.${prev.system}) caelestia-shell;
                 })
               ];
             }
@@ -62,12 +62,13 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/aven
+            nixos-hardware.nixosModules.framework-amd-ai-300-series
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [
                 (final: prev: {
-                  inherit  (caelestia-shell.packages.${prev.system}) caelestia-shell;
+                  inherit (caelestia-shell.packages.${prev.system}) caelestia-shell;
                 })
               ];
             }
@@ -96,30 +97,31 @@
         };
       };
 
-      images = builtins.mapAttrs
-        (name: host: (nixos-generators.nixosGenerate
-          {
-            modules = host._module.args.modules;
-            system = "aarch64-linux";
-            format = "sd-aarch64";
-            pkgs = nixpkgs.legacyPackages.aarch64-linux;
-          }))
-        self.nixosConfigurations;
+      images = builtins.mapAttrs (
+        name: host:
+        (nixos-generators.nixosGenerate {
+          modules = host._module.args.modules;
+          system = "aarch64-linux";
+          format = "sd-aarch64";
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        })
+      ) self.nixosConfigurations;
 
       colmena = {
         meta.allowApplyAll = false;
-        defaults = { name, config, ... }: {
-          deployment = {
-            # tags = [ ];
-            targetHost = config.networking.fqdn;
-            targetUser = "root";
+        defaults =
+          { name, config, ... }:
+          {
+            deployment = {
+              # tags = [ ];
+              targetHost = config.networking.fqdn;
+              targetUser = "root";
+            };
           };
-        };
-      } // builtins.mapAttrs
-        (name: host: {
-          nixpkgs = { inherit (host.config.nixpkgs) system; };
-          imports = host._module.args.modules;
-        })
-        self.nixosConfigurations;
+      }
+      // builtins.mapAttrs (name: host: {
+        nixpkgs = { inherit (host.config.nixpkgs) system; };
+        imports = host._module.args.modules;
+      }) self.nixosConfigurations;
     };
 }

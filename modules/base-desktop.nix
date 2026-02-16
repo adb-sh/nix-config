@@ -1,6 +1,14 @@
-{ config, pkgs, lib, options, ... }:
 {
-  environment.sessionVariables = { GTK_THEME = "Adwaita:dark"; };
+  config,
+  pkgs,
+  lib,
+  options,
+  ...
+}:
+{
+  environment.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+  };
 
   services = {
     accounts-daemon.enable = true;
@@ -9,10 +17,6 @@
     yubikey-agent.enable = true;
     udev.packages = [ pkgs.yubikey-personalization ];
     gnome.gnome-keyring.enable = true;
-  };
-
-  fonts.fontconfig = {
-    enable = true;
   };
 
   fonts = {
@@ -25,8 +29,9 @@
       font-awesome
     ];
     fontconfig = {
+      enable = true;
       defaultFonts = {
-        serif = [  "Ubuntu" ];
+        serif = [ "Ubuntu" ];
         sansSerif = [ "0xProto Nerd Font" ];
         monospace = [ "FiraCode Nerd Font" ];
       };
@@ -80,12 +85,14 @@
 
     # gnome-keysign
     seahorse
+    bitwarden-desktop
   ];
 
   programs.direnv.enable = true;
 
-  environment.shellInit = ''export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+  environment.shellInit = ''
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
   '';
 
   programs = {
