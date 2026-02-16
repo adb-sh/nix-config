@@ -1,15 +1,5 @@
+{ pkgs, ... }:
 {
-  config,
-  pkgs,
-  lib,
-  options,
-  ...
-}:
-{
-  environment.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-  };
-
   services = {
     accounts-daemon.enable = true;
     printing.enable = true;

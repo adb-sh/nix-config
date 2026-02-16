@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
 {
   programs = {
     xwayland.enable = true;
@@ -36,7 +32,10 @@
       };
     };
   };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+    NIXOS_OZONE_WL = "1";
+  };
 
   security.polkit.enable = true;
 

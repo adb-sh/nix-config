@@ -1,4 +1,7 @@
-{ config, pkgs, options, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   # enable SPI
