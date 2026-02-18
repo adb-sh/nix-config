@@ -91,7 +91,15 @@
           system = "aarch64-linux";
           modules = [
             ./hosts/home
-            nixos-hardware.nixosModules.raspberry-pi-4 # add hardware options for rpi4 f/e spi
+            nixos-hardware.nixosModules.raspberry-pi-4
+            ./modules/spi.nix
+          ];
+        };
+        melo-home = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./hosts/melo-home
+            nixos-hardware.nixosModules.raspberry-pi-4
             ./modules/spi.nix
           ];
         };
