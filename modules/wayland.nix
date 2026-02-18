@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   programs = {
-    xwayland.enable = true;
     hyprland = {
       enable = true;
+      withUWSM = true;
       xwayland.enable = true;
     };
   };
@@ -15,10 +15,11 @@
     };
   };
 
-  services.displayManager = {
-    defaultSession = "hyprland";
-    ly.enable = true;
-  };
+  # services.displayManager = {
+  #   defaultSession = "hyprland";
+  #   ly.enable = true;
+  # };
+  programs.regreet.enable = true;
 
   xdg.portal = {
     enable = true;

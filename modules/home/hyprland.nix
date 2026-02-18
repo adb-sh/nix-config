@@ -28,11 +28,14 @@
       xwayland = {
         force_zero_scaling = true;
       };
+      # env = [
+      #   "NIXOS_OZONE_WL,1"
+      # ];
       general = {
         layout = "hy3";
         resize_on_border = true;
         gaps_in = 4;
-        gaps_out = 2;
+        gaps_out = 4;
         border_size = 2;
         # use catpuccin colors
         "col.active_border" = "$accent";

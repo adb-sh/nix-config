@@ -8,12 +8,23 @@
       "toml"
       "gleam"
       "kotlin"
+      "make"
+      "elixir"
+      "dockerfile"
     ];
 
     # settings.json rendered by HM
     userSettings = {
       base_keymap = "JetBrains";
       load_direnv = "shell_hook";
+      buffer_font_family = "FiraCode Nerd Font";
+      buffer_font_size = 14;
+      ui_font_family = "Inter";
+      ui_font_size = 16;
+      terminal = {
+        font_family = "0xProto Nerd Font";
+        font_size = 14;
+      };
       session = {
         restore_unsaved_buffers = true;
         trust_all_worktrees = true;
@@ -60,6 +71,7 @@
             };
           };
         };
+        elixir-ls.binary.path = lib.getExe pkgs.elixir-ls;
         nil.binary.path = lib.getExe pkgs.nil;
         nixd.binary.path = lib.getExe pkgs.nixd;
         package-version-server.binary.path = lib.getExe pkgs.package-version-server;

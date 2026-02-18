@@ -26,7 +26,6 @@
     python311Packages.pip
     # freecad
     colmena
-    qlcplus
     age
     kustomize
     kustomize-sops

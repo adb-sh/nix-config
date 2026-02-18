@@ -7,6 +7,7 @@
     yubikey-agent.enable = true;
     udev.packages = [ pkgs.yubikey-personalization ];
     gnome.gnome-keyring.enable = true;
+    udisks2.enable = true;
   };
 
   fonts = {
@@ -35,7 +36,6 @@
     libreoffice
     # scribus
     kitty
-    nautilus
     gparted
     maim
     xclip
@@ -57,6 +57,9 @@
     audacity
     freetube
     tidal-hifi
+    nemo-with-extensions
+    udiskie
+    gnome-maps
 
     # different common fonts for icons
     # dejavu_fonts

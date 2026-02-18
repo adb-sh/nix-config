@@ -1,17 +1,25 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
-      ../../modules/base.nix
-      ../../modules/zsh.nix
-      ../../modules/home-assistant.nix
-    ];
+  imports = [
+    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+    ../../modules/base.nix
+    ../../modules/zsh.nix
+    ../../modules/home-assistant.nix
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = lib.mkForce [ "vfat" "ext4" ];
+    supportedFilesystems = lib.mkForce [
+      "vfat"
+      "ext4"
+    ];
     loader = {
       raspberryPi.version = 4;
       generic-extlinux-compatible.enable = lib.mkDefault true;
@@ -25,7 +33,10 @@
   networking = {
     useDHCP = lib.mkDefault true;
     # defaultGateway = "192.168.1.1";
-    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
   };
 
   networking.hostName = "home";
@@ -38,7 +49,10 @@
   users.users.adb = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
     packages = with pkgs; [ ];
   };
   users.users.root = {
