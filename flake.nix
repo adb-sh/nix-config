@@ -2,6 +2,8 @@
   description = "my based nix configs :3";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -21,6 +23,8 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
+      nixpkgs-master,
       nixos-hardware,
       nixos-generators,
       catppuccin,
@@ -28,74 +32,61 @@
       caelestia-shell,
     }:
     {
-      nixosConfigurations = {
-
-        naomi = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/naomi
+      nixosConfigurations =
+        let
+          desktop-modules = host: [
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [
                 (final: prev: {
                   inherit (caelestia-shell.packages.${prev.system}) caelestia-shell;
+                  unstable = import nixpkgs-unstable { system = prev.system; };
+                  master = import nixpkgs-master { system = prev.system; };
                 })
               ];
-            }
-            {
               home-manager = {
                 backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
                 users.adb = {
                   imports = [
                     catppuccin.homeModules.catppuccin
                     caelestia-shell.homeManagerModules.default
-                    ./hosts/naomi/home.nix
+                    ./hosts/${host}/home.nix
                   ];
                 };
               };
             }
           ];
-        };
+        in
+        {
+          naomi = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./hosts/naomi
+            ]
+            ++ desktop-modules "naomi";
+          };
 
-        aven = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/aven
-            nixos-hardware.nixosModules.framework-amd-ai-300-series
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  inherit (caelestia-shell.packages.${prev.system}) caelestia-shell;
-                })
-              ];
-            }
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                users.adb = {
-                  imports = [
-                    catppuccin.homeModules.catppuccin
-                    caelestia-shell.homeManagerModules.default
-                    ./hosts/aven/home.nix
-                  ];
-                };
-              };
-            }
-          ];
-        };
+          aven = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./hosts/aven
+              nixos-hardware.nixosModules.framework-amd-ai-300-series
+            ]
+            ++ desktop-modules "aven";
+          };
 
-        home = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            ./hosts/home
-            nixos-hardware.nixosModules.raspberry-pi-4 # add hardware options for rpi4 f/e spi
-            ./modules/spi.nix
-          ];
+          home = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              ./hosts/home
+              nixos-hardware.nixosModules.raspberry-pi-4
+              ./modules/spi.nix
+            ];
+          };
         };
-      };
 
       images = builtins.mapAttrs (
         name: host:

@@ -15,11 +15,13 @@
     };
   };
 
-  # services.displayManager = {
-  #   defaultSession = "hyprland";
-  #   ly.enable = true;
-  # };
-  programs.regreet.enable = true;
+  services.displayManager = {
+    defaultSession = "hyprland";
+    cosmic-greeter = {
+      enable = true;
+      package = pkgs.unstable.cosmic-greeter;
+    };
+  };
 
   xdg.portal = {
     enable = true;

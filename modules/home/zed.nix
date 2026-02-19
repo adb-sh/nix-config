@@ -2,6 +2,7 @@
 {
   programs.zed-editor = {
     enable = true;
+    package = pkgs.master.zed-editor;
 
     extensions = [
       "nix"
