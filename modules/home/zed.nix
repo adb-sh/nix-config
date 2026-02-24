@@ -12,6 +12,7 @@
       "make"
       "elixir"
       "dockerfile"
+      "helm"
     ];
 
     # settings.json rendered by HM
@@ -23,7 +24,7 @@
       ui_font_family = "Inter";
       ui_font_size = 16;
       terminal = {
-        font_family = "0xProto Nerd Font";
+        font_family = "FiraCode Nerd Font";
         font_size = 14;
       };
       session = {
