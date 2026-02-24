@@ -88,6 +88,8 @@
     gpgconf --launch gpg-agent
   '';
 
+  services.upower.enable = true;
+
   programs = {
     mosh.enable = true;
     gnupg.agent = {
