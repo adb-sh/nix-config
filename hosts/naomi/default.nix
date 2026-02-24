@@ -66,6 +66,17 @@
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
+    openssh.authorizedKeys.keyFiles = [
+      ../../keys/ssh/adb
+    ];
+  };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = false;
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate =
