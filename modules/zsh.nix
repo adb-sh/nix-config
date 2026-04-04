@@ -22,8 +22,9 @@
         "history"
         "history-substring-search"
         "timer"
+        "kubectl"
       ];
-      theme = "robbyrussell";
+      theme = "gnzh";
     };
   };
 }

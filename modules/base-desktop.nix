@@ -55,7 +55,7 @@
     ffmpeg-full
     vlc
     audacity
-    freetube
+    master.freetube
     tidal-hifi
     nemo-with-extensions
     udiskie

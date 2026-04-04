@@ -2,30 +2,37 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./network.nix
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./network.nix
+    ./hardware-configuration.nix
 
-      ../../modules/base.nix
-      ../../modules/base-desktop.nix
-      ../../modules/wayland.nix
-      ../../modules/pipewire.nix
-      ../../modules/bluetooth.nix
-      ../../modules/zsh.nix
-      ../../modules/development.nix
-      # ../../modules/gaming.nix
-    ];
+    ../../modules/base.nix
+    ../../modules/base-desktop.nix
+    ../../modules/wayland.nix
+    ../../modules/pipewire.nix
+    ../../modules/bluetooth.nix
+    ../../modules/zsh.nix
+    ../../modules/development.nix
+    # ../../modules/fastflowlm.nix
+    # ../../modules/gaming.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  hardware.amd-npu.enable = true;
 
   networking.hostName = "aven"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -54,15 +61,23 @@
   users.users.adb = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "docker" "libvirtd" "seat" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+      "libvirtd"
+      "seat"
+      "video"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "castlabs-electron"
-    "open-webui"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "castlabs-electron"
+      "open-webui"
+    ];
 
   programs.streamcontroller = {
     enable = true;

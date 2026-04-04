@@ -5,6 +5,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-amd-npu.url = "github:robcohen/nix-amd-npu";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
       nixpkgs-unstable,
       nixpkgs-master,
       nixos-hardware,
+      nix-amd-npu,
       nixos-generators,
       catppuccin,
       home-manager,
@@ -74,6 +76,7 @@
             modules = [
               ./hosts/aven
               nixos-hardware.nixosModules.framework-amd-ai-300-series
+              nix-amd-npu.nixosModules.default
             ]
             ++ desktop-modules "aven";
           };

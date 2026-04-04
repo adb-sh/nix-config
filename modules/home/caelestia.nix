@@ -62,12 +62,21 @@
         thickness = 8;
         rounding = 12;
       };
+      lock = {
+        recolourLogo = false;
+        hideNotifs = true;
+      };
       notifs = {
         actionOnClick = true;
         openExpanded = true;
       };
+      paths = {
+        mediaGif = "~/Pictures/aniyuki-anime-dance-gif-43.gif";
+        sessionGif = "root:/assets/kurukuru.gif";
+      };
       services = {
         useFahrenheit = false;
+        useFahrenheitPerformance = false;
         useTwelveHourClock = false;
       };
       background = {
