@@ -27,6 +27,8 @@
     dconf # required by paprefs
     nix-index # indexing nix packages
     wget
+    zip
+    unzip
     git
     htop
     openssl

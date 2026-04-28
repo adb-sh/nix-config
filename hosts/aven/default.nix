@@ -32,7 +32,17 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  hardware.amd-npu.enable = true;
+  # hardware.amd-npu = {
+  #   enable = true;
+  #   enableFastFlowLM = true;
+  #   enableLemonade = true;
+  #   enableROCm = true;
+  #   enableVulkan = true;
+  #   lemonade.user = "adb";
+  # };
+  hardware.amd-npu = {
+    enable = true;
+  };
 
   networking.hostName = "aven"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -67,6 +77,7 @@
       "libvirtd"
       "seat"
       "video"
+      "render"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
@@ -92,6 +103,8 @@
     openrgb
     obs-studio
     rawtherapee
+    # xrt
+    # fastflowlm
   ];
 
   # obs stuff

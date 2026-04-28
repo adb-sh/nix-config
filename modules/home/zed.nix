@@ -13,6 +13,8 @@
       "elixir"
       "dockerfile"
       "helm"
+      "nginx"
+      "mdx"
     ];
 
     # settings.json rendered by HM
@@ -23,6 +25,7 @@
       buffer_font_size = 14;
       ui_font_family = "Inter";
       ui_font_size = 16;
+      tab_size = 2;
       terminal = {
         font_family = "FiraCode Nerd Font";
         font_size = 14;
@@ -79,9 +82,17 @@
         package-version-server.binary.path = lib.getExe pkgs.package-version-server;
       };
 
+      edit_predictions = {
+        mode = "subtle";
+        ollama = {
+          api_url = "http://localhost:52625";
+          model = "gpt-oss:20b";
+        };
+      };
       agent = {
         default_model = {
           provider = "ollama";
+          api_url = "http://localhost:52625";
           model = "gpt-oss:20b";
         };
       };

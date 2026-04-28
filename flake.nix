@@ -6,6 +6,7 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-amd-npu.url = "github:robcohen/nix-amd-npu";
+    nix-amd-ai.url = "github:noamsto/nix-amd-ai";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +29,7 @@
       nixpkgs-master,
       nixos-hardware,
       nix-amd-npu,
+      nix-amd-ai,
       nixos-generators,
       catppuccin,
       home-manager,
@@ -76,7 +78,17 @@
             modules = [
               ./hosts/aven
               nixos-hardware.nixosModules.framework-amd-ai-300-series
+              # nix-amd-ai.nixosModules.default
               nix-amd-npu.nixosModules.default
+              {
+                environment.systemPackages = [
+                  nix-amd-npu.packages.x86_64-linux.fastflowlm
+                  nix-amd-ai.packages.x86_64-linux.lemonade
+                ];
+              }
+              # {
+              #   nixpkgs.overlays = [ nix-amd-npu.overlays.default ];
+              # }
             ]
             ++ desktop-modules "aven";
           };

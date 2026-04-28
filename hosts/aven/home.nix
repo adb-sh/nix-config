@@ -8,7 +8,7 @@
     "eDP-1, 2880x1920@120, 0x0, 1.25"
     "DP-9, 4096x2160@120, auto-center-right, 1"
     "DP-10, 1024x2160@120, auto-center-right, 1"
-    ", highrr, auto-center-right, 1"
+    ", preferred, auto-center-right, 1"
   ];
 
   catppuccin.accent = "green";
