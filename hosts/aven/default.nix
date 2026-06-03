@@ -88,6 +88,7 @@
     builtins.elem (lib.getName pkg) [
       "castlabs-electron"
       "open-webui"
+      "slack"
     ];
 
   programs.streamcontroller = {
@@ -103,6 +104,7 @@
     openrgb
     obs-studio
     rawtherapee
+    slack
     # xrt
     # fastflowlm
   ];
