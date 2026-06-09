@@ -86,7 +86,7 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
-      "castlabs-electron"
+      # "castlabs-electron"
       "open-webui"
       "slack"
     ];

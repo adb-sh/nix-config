@@ -20,10 +20,9 @@
     buildpack
     deno
     kicad
-    nodePackages.pnpm
-    nodePackages.prisma
+    pnpm
+    prisma
     python3
-    python311Packages.pip
     # freecad
     colmena
     age

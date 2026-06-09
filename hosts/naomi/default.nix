@@ -91,7 +91,7 @@
       # "parsec-bin"
       "terraform"
       "vagrant"
-      "castlabs-electron"
+      # "castlabs-electron"
       "open-webui"
     ];
 

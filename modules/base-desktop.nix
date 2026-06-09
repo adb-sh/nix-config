@@ -56,7 +56,7 @@
     vlc
     audacity
     master.freetube
-    tidal-hifi
+    # tidal-hifi # insecure electron version
     nemo-with-extensions
     udiskie
     gnome-maps
@@ -69,16 +69,15 @@
 
     # audio foo
     pulsemixer
-    blueberry
 
-    # development
     # vscode
     gcc
     wev
+    v4l-utils
 
     # gnome-keysign
     seahorse
-    bitwarden-desktop
+    # bitwarden-desktop # insecure electron version
   ];
 
   programs.direnv.enable = true;

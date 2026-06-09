@@ -5,6 +5,7 @@
     plugins = [
       "${pkgs.hyprlandPlugins.hy3}/lib/libhy3.so"
     ];
+    configType = "hyprlang";
     settings = {
       plugin.hy3 = {
         no_gaps_when_only = 1;
@@ -17,11 +18,11 @@
           blur = false;
           opacity = 0.6;
           # use catpuccin colors
-          "col.active" = "$surface0";
-          "col.focused" = "$base";
-          "col.inactive" = "$mantle";
-          "col.active.border" = "$accent";
-          "col.focused.border" = "$accent";
+          # "col.active" = "$surface0";
+          # "col.focused" = "$base";
+          # "col.inactive" = "$mantle";
+          # "col.active.border" = "$accent";
+          # "col.focused.border" = "$accent";
         };
       };
       monitor = [ ];
@@ -31,6 +32,11 @@
       # env = [
       #   "NIXOS_OZONE_WL,1"
       # ];
+
+      # TODO: debug catpuccin colors and migrate to lua config
+      debug = {
+        suppress_errors = true;
+      };
       general = {
         layout = "hy3";
         resize_on_border = true;
@@ -38,8 +44,8 @@
         gaps_out = 4;
         border_size = 2;
         # use catpuccin colors
-        "col.active_border" = "$accent";
-        "col.inactive_border" = "$surface1";
+        # "col.active_border" = "$accent";
+        # "col.inactive_border" = "$surface1";
       };
       decoration = {
         rounding = 10;
@@ -64,8 +70,8 @@
         "workspaces, 1, 2, almostLinear, slidevert"
       ];
       windowrule = [
-        "opacity 0.9 override 0.9 override 0.9 override, class:kitty"
-        "opacity 0.9 override 0.9 override 0.9 override, class:dev.zed.Zed"
+        "opacity 0.9 override 0.9 override 0.9 override, match:class kitty"
+        "opacity 0.9 override 0.9 override 0.9 override, match:class dev.zed.Zed"
       ];
 
       "$mod" = "SUPER";
@@ -100,6 +106,10 @@
         # scroll through existing workspaces with mod + scroll
         "$mod, mouse_down, workspace, e-1"
         "$mod, mouse_up, workspace, e+1"
+
+        # scroll through workspaces with mod + shift + scroll
+        "$mod SHIFT, mouse_down, workspace, -1"
+        "$mod SHIFT, mouse_up, workspace, +1"
 
         # tab through existing workspaces
         "$mod, TAB, workspace, e+1"
