@@ -89,6 +89,7 @@
       # "castlabs-electron"
       "open-webui"
       "slack"
+      "davinci-resolve"
     ];
 
   programs.streamcontroller = {
@@ -105,10 +106,12 @@
     obs-studio
     rawtherapee
     slack
+    davinci-resolve
+    ardour
+    rustdesk-flutter
     # xrt
     # fastflowlm
   ];
-
   # obs stuff
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
@@ -116,6 +119,16 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
+
+  environment.variables = {
+    RUSTICL_ENABLE = "radeonsi";
+  };
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      mesa.opencl # Enables Rusticl (OpenCL) support
+    ];
+  };
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;

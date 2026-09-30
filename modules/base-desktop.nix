@@ -60,6 +60,7 @@
     nemo-with-extensions
     udiskie
     gnome-maps
+    localsend
 
     # different common fonts for icons
     # dejavu_fonts

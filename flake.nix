@@ -6,7 +6,7 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-amd-npu.url = "github:robcohen/nix-amd-npu";
-    nix-amd-ai.url = "github:noamsto/nix-amd-ai";
+    nix-amd-ai.url = "github:noamsto/nix-amd-ai/v2026.06.11";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
